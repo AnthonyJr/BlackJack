@@ -1,0 +1,284 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>Blackjack by Paul Piwowarski/Linton</TITLE>
+
+	<SCRIPT LANGUAGE="JavaScript">
+/* 
+CS316 program 1
+Initial Author: Paul Piwowarski 2014/09
+Modifications: Paul Linton 2016/09
+
+Example code to start Program 1
+*/
+//****************************** GLOBAL VARIABLES ***********************************************
+// DSIZE is size of deck: 52 for normal deck
+// Note: do not hardcode deck size. Use this variable
+// to simplify my (and your) testing
+var DSIZE = 52; // size of deck
+var card = new Array(DSIZE); // shuffled deck
+var cardstart = new Array(DSIZE); // starting deck in order
+var cc; // index into card array during play
+var dealpressed    // deal button has been pressed
+// Put other global variables here ***********************************************************************
+shuffle();   // start with new deal
+// shuffle
+// This is one way to create a shuffled deck
+// reshuffle the cards, put in card array
+// Preconditions:
+//	New Deal button pressed
+// Postconditions:
+//	Card array filled and shuffled
+
+function shuffle() {  
+	// cardstart is unshuffled 1,2,3....
+	// card 1 is ace of clubs (1.png)
+	// card 2 is ace of spades (2.png)
+	// card 52 is 2 of diamonds (52.png)
+	for (var i = 0; i < DSIZE;i++) {
+		cardstart[i] = i+1;
+	}
+	// select card randomly from cardstart and put in card
+	var randcard; // randomly selected card 
+	for (var j = 0; j < DSIZE; j++) {
+		randcard = Math.round(Math.random() * (DSIZE - j - 1)); // choose card
+		card[j] = cardstart[randcard]; // store random card
+		cardstart.splice(randcard, 1); // pack array
+	}  
+	cc = 0;              // index into card array
+}
+
+// resetdata
+// reset all variables, screen fields to start fresh
+
+function resetdata() {
+	alert("Reset pressed");  // replace with actual code for reset
+}
+
+// calculate
+// calculate value of card
+// Preconditions:
+//	Card passed
+//	1 <= card <= 52
+// Postconditions:
+//	Card value returned
+function calculate(card) {
+var value; // numerical value of card
+	if (card <= 4) {    // ace
+		value = 11;
+		return value; 
+	}
+	if (card <= 20) {   // face card or 10
+		value = 10;
+		return value;
+	}
+	if (card <= 24) {  // 9, and so forth
+		value = 9;
+		return value;
+	}    
+	if (card <= 28) {
+		value = 8;
+		return value;
+	}      
+	if (card <= 32) {
+		value = 7;
+		return value;
+	}    
+	if (card <= 36) {
+		value = 6;
+		return value;
+	}    
+	if (card <= 40) {
+		value = 5;
+		return value;
+	}    
+	if (card <= 44) {
+		value = 4;
+		return value;
+	}    
+	if (card <= 48) {
+		value = 3;
+		return value;
+	}   
+	value = 2;          // only 2 left
+	return value; 
+}
+
+  // getcard
+  // get card from cardstart, then remove from deck
+  function getcard() {
+    var card;
+    // One way to do this:
+    // Get a random number from 1 to size of
+    // remaining deck - cards in cardstart 
+    // See Math.random function
+    // return that card
+    // Delete card from cardstart array by using the
+    // slice function on arrays: 
+    // Get the array in front of the selected card
+    // Get the array after the card
+    // Put the two slices together and replace
+    // cardstart with it
+    return card;
+  }
+
+  // run 1000 times
+  function run1000() {
+    var i;
+    alert("Run 1000 pressed");  // delete when run1000 coded
+    for (i=0;i<1000;i++) {
+ 
+      shuffle();   // start with shuffled deck
+      
+                 // then deal 
+   
+                    // then run
+    }   
+    // when done, update the screen
+ 
+  }
+ 
+  // hit
+  // Determine whether to take one more card
+  // Preconditions:
+  //    playerhand - array of card values
+  //	dealerhand - array of card values
+  // Postconditions:
+  //    returns true: take another card
+  //            false: do not take card
+  //    For the input cards (playerhand[], dealerhand[])
+  //    ace  11
+  //    face card 10
+  //    all others their value 
+  function hit(playerhand, dealerhand) {
+ 
+    
+  }
+
+
+
+// run
+// after deal, determine whether to take card or not
+// Preconditions:
+//	Deal button pressed
+// Postconditions:
+//	Game completed
+//	Results displayed 
+function run() {
+//	alert("Run pressed");  // replace with actual code for run
+}
+// deal
+// start by dealing 2 cards to opponent and you
+function deal() {
+	// deal cards and display data
+	dealpressed = 1; // deal button has been pressed
+	// draw two cards for each player
+	dlcard1number = card[cc++];
+	dlcard2number = card[cc++];
+	mycard1number = card[cc++];
+	mycard2number = card[cc++];
+	var dlcard1 = "<img src = '"+dlcard1number+".png' />";
+	var dlcard2 = "<img src = '"+dlcard2number+".png' />";
+	dlcards = dlcard1 + dlcard2;
+	var mycard1 = "<img src = '"+mycard1number+".png' />";
+	var mycard2 = "<img src = '"+mycard2number+".png' />";
+	mycards = mycard1 + mycard2;
+    	// Example how to display on screen in textboxes
+    	document.JForm.opscore.value ="BUST";
+    	document.JForm.myscore.value = 21;
+    	// Display cards on screen
+    	document.getElementById("dlcards").innerHTML = dlcards; 
+	   	document.getElementById("mycards").innerHTML = mycards;
+	
+}
+
+</SCRIPT>
+
+</HEAD>
+<BODY >
+<FORM NAME="JForm">
+<CENTER>
+	<TABLE CELLPADDING=2 CELLSPACING=2 STYLE="page-break-before: always">
+		<TR>
+			<TH STYLE="border: none; padding: 0in">
+				<P>New deal</P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P><INPUT TYPE=BUTTON VALUE="Shuffle" STYLE="width: 1.08in; height: 0.4in" ONCLICK="shuffle();"> </P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P>Reset</P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P><INPUT TYPE=BUTTON VALUE="Reset" STYLE="width: 0.75in; height: 0.4in" ONCLICK="resetdata();"> </P>
+			</TH>
+		</TR>		<!-- row 1 -->
+		<TR>
+			<TH STYLE="border: none; padding: 0in">
+				<P>Dealer score: </P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P><INPUT TYPE=TEXT NAME="opscore" VALUE="0" SIZE=5 STYLE="width: 0.51in; height: 0.31in"> </P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P>My score: </P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P><INPUT TYPE=TEXT NAME="myscore" VALUE="0" SIZE=5 STYLE="width: 0.51in; height: 0.31in"> </P>
+			</TH>
+			<TD COLSPAN=2 VALIGN=TOP STYLE="border: none; padding: 0in"></TD>
+		</TR>		<!-- row 2 -->
+		<TR>
+			<TH STYLE="border: none; padding: 0in">
+				<P>Win/Loss?: </P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P><INPUT TYPE=TEXT NAME="myresult" VALUE="0" SIZE=5 STYLE="width: 0.51in; height: 0.31in"> </P>
+			</TH>
+<!--			<TD COLSPAN=2 VALIGN=TOP STYLE="border: none; padding: 0in"></TD>  -->
+			<TH STYLE="border: none; padding: 0in">
+				<P>My win %: </P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in"> 
+				<P><INPUT TYPE=TEXT NAME="winning" VALUE="100" SIZE=5 STYLE="width: 0.51in; height: 0.31in"> </P>
+			</TH>
+		
+			<TH STYLE="border: none; padding: 0in"></TH>
+			<TD VALIGN=TOP STYLE="border: none; padding: 0in"></TD>
+		</TR>		<!-- row 3 -->
+		<TR>
+			<TH STYLE="border: none; padding: 0in">
+				<P>Deal/Hit</P> 
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P><INPUT TYPE=BUTTON VALUE="Deal/Hit" STYLE="width: 0.64in; height: 0.4in" ONCLICK="deal();"> </P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P>Stay</P> 
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P><INPUT TYPE=BUTTON VALUE="Stay" STYLE="width: 0.59in; height: 0.4in" ONCLICK="run();"> </P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in"> 
+				<P>Run 1000 times</P>
+			</TH>
+			<TH STYLE="border: none; padding: 0in">
+				<P><INPUT TYPE=BUTTON VALUE="Run" STYLE="width: 0.59in; height: 0.4in" ONCLICK="run1000();"> </P>
+			</TH>
+		</TR>		<!-- row 4 -->
+	</TABLE>
+</CENTER>
+</FORM>
+<h2 align=center>Dealer's Cards</h2>
+<div id="dlcards" align=center> 
+	<h2  align=center></h2>
+</div>
+<h2  align=center> My Cards</h2>
+<div id="mycards" align=center >
+	<h2 class="WESTERN" align=center></h2>
+</div>
+
+</BODY>
+</HTML>
